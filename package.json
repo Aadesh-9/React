@@ -1,0 +1,11 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "this is react by aadesh",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Aadesh Wasamkar",
+  "license": "ISC"
+}
