@@ -64,6 +64,7 @@ const Body = () => {
       <div className="filter">
         <div className="search">
           <input
+            data-testid="searchInput"
             type="text"
             name="text"
             placeholder="  search restaurants"
@@ -121,7 +122,7 @@ const Body = () => {
             {restaurant.info.promoted ? (
               <RestaurantCardPromoted resData={restaurant} />
             ) : (
-              <RestaurantCard resData={restaurant} />
+              <RestaurantCard resData={restaurant?.info} />
             )}
           </Link>
         ))}
