@@ -21,21 +21,40 @@ const Body = () => {
 
   const RestaurantCardPromoted = WithLabelPromoted(RestaurantCard);
 
+  const fetchData = async () => {
+    try {
+      const data = await fetch(RES_LIST_API);
+      if (!data.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const json = await data.json();
+      setListOfRestaurant(
+        json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
+      );
+      setFilteredRestaurant(
+        json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
+      );
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle error condition, e.g., display an error message to the user
+    }
+  };
+
+  // const fetchData = async () => {
+  //   const data = await fetch(RES_LIST_API);
+
+  //   const json = await data.json();
+  //   setListOfRestaurant(
+  //     json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
+  //   );
+  //   setFilteredRestaurant(
+  //     json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
+  //   );
+  // };
+
   useEffect(() => {
     fetchData();
   }, []);
-
-  const fetchData = async () => {
-    const data = await fetch(RES_LIST_API);
-
-    const json = await data.json();
-    setListOfRestaurant(
-      json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
-    );
-    setFilteredRestaurant(
-      json?.data?.cards[1]?.card.card.gridElements.infoWithStyle.restaurants
-    );
-  };
 
   const onlineStatus = useOnlineStatus();
 
@@ -92,7 +111,7 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="relative inset-y-[-77px] inset-x-[1150px] m-4 p-4 flex items-center">
+        <div className="relative inset-y-[-77px] inset-x-[1150px] m-4 p-2 flex items-center -mb-8">
           <label className="font-semibold ">UserName </label>
           <input
             className="rounded-lg ml-2 border border-blue-600 p-2 font-bold "
@@ -102,10 +121,10 @@ const Body = () => {
         </div>
 
         <button
-          className="relative inset-x-7 border-2 px-3 py-3 bg-blue-300 border-solid border-black"
+          className="relative inset-x-7 border-2 px-3 py-3 bg-blue-300 border-solid border-black -mt-[100%] mb-2"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating >= 4.2
+              (res) => res.info.avgRating >= 4.3
             );
             setFilteredRestaurant(filteredList);
           }}
